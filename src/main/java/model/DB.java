@@ -31,5 +31,4 @@ public class DB{
         preparedStatement.executeUpdate();
     }
 
-
 }

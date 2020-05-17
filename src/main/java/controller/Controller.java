@@ -2,12 +2,14 @@ package controller;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import model.Crawler;
+import model.DB;
 
 public class Controller {
 
@@ -32,6 +34,9 @@ public class Controller {
     @FXML
     void initialize() throws MalformedURLException {
         String tempUrl  = textUrl.getText();
+
+        DB dataBase = new DB();
+
         if (tempUrl.equals(""))
             throw new IllegalArgumentException("Введите URl");
         //если не ввели строку, то не запускаем программу
@@ -43,6 +48,18 @@ public class Controller {
                 Crawler crawler = new Crawler(url, depth);
             });
         }else throw new IllegalArgumentException("Формат URL неверный");
+
+
+        findButton.setOnAction(event -> {
+            try {
+                dataBase.addToDB(tempUrl);
+            } catch (SQLException | ClassNotFoundException throwables) {
+                throwables.printStackTrace();
+            }
+        });
+
+
+
     }
 }
 
