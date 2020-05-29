@@ -1,37 +1,30 @@
 package model;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.LinkedHashSet;
 
+
 public class Crawler {
 
-    private final URL startUrl;
-    private final int depth;
-    //private final boolean needDownload;
-    //первая ссылка полученная от пользователя.
-
-    public Crawler(URL startUrl, int depth) {
-        this.startUrl = startUrl;
-        //стартовый url
-        this.depth = depth;
-        //количество ссылок
-        //this.needDownload = needDownload;
+    public Crawler(String firstUrl, int numberOfUrl) {
+        this.firstUrl = firstUrl;
+        this.numberOfUrl = numberOfUrl;
     }
-    //в графике заблочить возможность не ввести startURL
 
-    public LinkedHashSet<URL> crawl() {
+    private final String firstUrl;
+    private final int numberOfUrl;
 
-        LinkedHashSet<URL> needToParse = new LinkedHashSet<URL>();
+    public LinkedHashSet<URL> crawl() throws MalformedURLException {
+
+        LinkedHashSet<URL> needToParse = new LinkedHashSet<>();
         //сет который подается в парсер как изначальный
-
-        needToParse.add(startUrl);
+        URL firstAdd = new URL(firstUrl);
+        needToParse.add(firstAdd);
         //добавляем первый URL в лист
-
-        Parser parser = new Parser(depth);
+        Parser parser = new Parser(numberOfUrl);
         //создаем экземпляр класса который парсит URL и сохраняет оттуда ссылки
 
-        LinkedHashSet result = parser.htmlParser(needToParse,needToParse);
-        //список всех ссылок
-    return result;
+        return parser.htmlParser(needToParse,needToParse);
     }
 }

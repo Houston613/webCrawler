@@ -12,7 +12,7 @@ public class DownloadPage {
                     new BufferedReader(new InputStreamReader(webPage.openStream()));
 
             BufferedWriter writer =
-                    new BufferedWriter(new FileWriter("Download.html"));
+                    new BufferedWriter(new FileWriter(webPage.toString()+".html"));
 
             String line;
             while ((line = reader.readLine()) != null) {

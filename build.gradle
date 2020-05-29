@@ -12,18 +12,22 @@ sourceCompatibility = 11
 repositories {
     mavenCentral()
 }
+test {
+    useJUnitPlatform()
+}
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
     compile 'org.jsoup:jsoup:1.13.1'
-    compile 'com.oracle.ojdbc:ojdbc8:19.3.0.0'
+    compile group: 'com.h2database', name: 'h2', version: '1.4.200'
 
 }
 sourceSets {
     main {
         resources {
             srcDirs = ["src/main/java"]
-            includes = ["/view/MainFxml.fxml"]
+            includes = ["/view/MainFxml.fxml","/view/ResultFxml.fxml"]
         }
     }
 }
