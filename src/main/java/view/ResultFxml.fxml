@@ -4,9 +4,10 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="283.0" prefWidth="491.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Result">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="301.0" prefWidth="491.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Result">
    <children>
       <ListView fx:id="ResultList" prefHeight="247.0" prefWidth="491.0" />
-      <Button fx:id="downloadButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="484.0" text="DownloadURL's" textAlignment="CENTER" />
+      <Button fx:id="downloadButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="499.0" text="DownloadURL's" textAlignment="CENTER" />
+      <Button fx:id="addToDB" mnemonicParsing="false" prefHeight="25.0" prefWidth="511.0" text="Add to DataBase" />
    </children>
 </VBox>

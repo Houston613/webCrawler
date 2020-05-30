@@ -50,7 +50,7 @@ public class Controller {
                         Crawler crawler = new Crawler(text,numOfUrl);
 
                         result = crawler.crawl();
-
+                        System.out.println(result);
                         int tempDepth = 0;
 
                         Parent root = FXMLLoader.load(getClass().getResource("../view/ResultFxml.fxml"));

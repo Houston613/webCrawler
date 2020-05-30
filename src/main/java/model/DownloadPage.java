@@ -5,18 +5,22 @@ import java.net.MalformedURLException;
 
 public class DownloadPage {
 
-    public  void DownloadWebPage (URL webPage) {
+    public  void DownloadWebPage (URL webPage, int iter) {
         try {
             // Create URL object
             BufferedReader reader =
                     new BufferedReader(new InputStreamReader(webPage.openStream()));
+            System.out.println("connect");
 
             BufferedWriter writer =
-                    new BufferedWriter(new FileWriter(webPage.toString()+".html"));
+                    new BufferedWriter(new FileWriter("Download"+iter+".html"));
+            System.out.println("writer");
 
             String line;
             while ((line = reader.readLine()) != null) {
                 writer.write(line);
+                writer.write(System.lineSeparator());
+
             }
             reader.close();
             writer.close();
