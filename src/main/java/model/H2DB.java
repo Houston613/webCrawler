@@ -29,9 +29,10 @@ public class H2DB {
         try (Connection connection = getConnectionToDB()) {
             PreparedStatement createPreparedStatement;
             String createQuery =
-                    "CREATE TABLE " +regex(nameOfTable)+ " (id int primary key, name varchar(255))";
+                    "CREATE TABLE " +regex(nameOfTable)+" (id int primary key, name varchar(255))";
             //запрос на создание таблицы
             System.out.println("valid table query");
+            System.out.println(createQuery);
             createPreparedStatement = connection.prepareStatement(createQuery);
             createPreparedStatement.executeUpdate();
             createPreparedStatement.close();
@@ -45,12 +46,13 @@ public class H2DB {
         }
     }
 
-    public void insertInDB(String nameOfTable, String url,int iter) {
+    public void insertInDB(String nameOfTable, String url, int iter) {
         try (Connection connection = getConnectionToDB()) {
             connection.setAutoCommit(false);
             PreparedStatement insertPreparedStatement;
-            String insertQuery = "INSERT INTO "+regex(nameOfTable) +"(id, name) values("+iter+","+regex(url)+")";
+            String insertQuery = "INSERT INTO " +regex(nameOfTable)+" (id, name) values ("+iter+",'result')";
             System.out.println("valid request for addition");
+            System.out.println(insertQuery);
             //запрос на добавлеие в таблицу
 
             insertPreparedStatement = connection.prepareStatement(insertQuery);

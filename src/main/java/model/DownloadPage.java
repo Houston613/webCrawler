@@ -13,7 +13,7 @@ public class DownloadPage {
             System.out.println("connect");
 
             BufferedWriter writer =
-                    new BufferedWriter(new FileWriter("Download"+iter+".html"));
+                    new BufferedWriter(new FileWriter("Download"+ iter +".html"));
             System.out.println("writer");
 
             String line;
