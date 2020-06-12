@@ -8,7 +8,7 @@ public class H2DB {
     static final String USER = "sa";
     static final String PASS = "";
 
-    public void createDb() {
+    public static void createDb() {
         Connection conn = null;
         Statement stmt = null;
         try {
@@ -23,7 +23,7 @@ public class H2DB {
             System.out.println("Creating table in given database...");
             stmt = conn.createStatement();
             String sql = "CREATE TABLE IF NOT EXISTS TESTABLE " +
-                    "(id int primary key, name varchar(255))";
+                    "(id int IDENTITY NOT NULL PRIMARY KEY, name varchar(255))";
             stmt.executeUpdate(sql);
             System.out.println("Created table in given database...");
 
@@ -54,7 +54,7 @@ public class H2DB {
     }
     public void insertInDB(int iter, String url) {
         Connection conn = null;
-        PreparedStatement insertPS = null;
+        PreparedStatement insertPS;
 
         try {
             // STEP 1: Register JDBC driver
@@ -65,12 +65,11 @@ public class H2DB {
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
             //STEP 3: Create PS
-            insertPS = conn.prepareStatement("INSERT INTO TESTABLE (id, name) values (?,?)");
+            insertPS = conn.prepareStatement("INSERT INTO TESTABLE (name) values (?)");
             System.out.println("PS was created..");
 
             //STEP 4: Update PS
-            insertPS.setInt(1,iter);
-            insertPS.setString(2,url);
+            insertPS.setString(1,url);
             System.out.println("PS was update..");
 
             //STEP 5: Add PS in Table
@@ -88,11 +87,6 @@ public class H2DB {
 
         } finally {
             //finally block used to close resources
-            try{
-                if(insertPS!=null) insertPS.close();
-            } catch(SQLException se2) {
-
-            } // nothing we can do
             try {
                 if(conn!=null) conn.close();
             } catch(SQLException se){
