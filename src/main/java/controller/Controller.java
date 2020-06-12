@@ -54,7 +54,6 @@ public class Controller {
                         int tempDepth = 0;
 
                         Parent root = FXMLLoader.load(getClass().getResource("../view/ResultFxml.fxml"));
-                        assert root != null;
                         Scene scene = new Scene(root);
                         Stage stage = new Stage();
                         stage.setScene(scene);
@@ -62,17 +61,6 @@ public class Controller {
                         //создаем экзепляры всех используемых классов, а также окно, которое будет вызвано позже
 
                         stage.showAndWait();
-
-                        //в отдельном потоке создаем тааблицу с результатом.
-
-                        //H2DB dataBase = new H2DB(tempUrl);
-                        //dataBase.createDBTable();
-                        //for (URL link : result) {
-                            //tempDepth++;
-
-                            //dataBase.insertInDB(link.toString(), tempDepth);
-                        //}
-                        //в другом потоке подрубаемся к БД и добавляем все в нее.
 
                     } catch (IOException e) {
                         e.printStackTrace();

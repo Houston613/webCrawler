@@ -1,73 +1,105 @@
 package model;
-import com.sun.jdi.event.StepEvent;
-import controller.Controller;
-import javafx.css.Match;
 import java.sql.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class H2DB {
+    // JDBC driver name and database URL
+    static final String JDBC_DRIVER = "org.h2.Driver";
+    static final String DB_URL = "jdbc:h2:~/test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE";
+    static final String USER = "sa";
+    static final String PASS = "";
 
-    public Connection getConnectionToDB() throws ClassNotFoundException, SQLException {
-        Connection dbConnection;
-            Class.forName("org.h2.Driver");
-            dbConnection = DriverManager.getConnection("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;"
-                    +"INIT=CREATE SCHEMA IF NOT EXISTS URLS");
-            return dbConnection;
-    }
-    private String regex(String url){
-        //для того чтобы создать корректный query приходится убирать все знаки в запросах
-        Pattern http = Pattern.compile("https?://");
-        Matcher matcher = http.matcher(url);
-        url = matcher.replaceAll("");
-        Pattern text = Pattern.compile("\\W+");
-        Matcher matcher1 = text.matcher(url);
-        return url = matcher1.replaceAll("");
-    }
+    public void createDb() {
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            // STEP 1: Register JDBC driver
+            Class.forName(JDBC_DRIVER);
 
-    public void createDBTable(String nameOfTable){
-        try (Connection connection = getConnectionToDB()) {
-            PreparedStatement createPreparedStatement;
-            String createQuery =
-                    "CREATE TABLE " +regex(nameOfTable)+" (id int primary key, name varchar(255))";
-            //запрос на создание таблицы
-            System.out.println("valid table query");
-            System.out.println(createQuery);
-            createPreparedStatement = connection.prepareStatement(createQuery);
-            createPreparedStatement.executeUpdate();
-            createPreparedStatement.close();
-            connection.commit();
-            System.out.println("table created");
-            //установка соединения и добавления изменений
-        } catch (SQLException e) {
-            System.out.println("Exception Message " + e.getLocalizedMessage());
-        } catch (Exception e) {
+            //STEP 2: Open a connection
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            //STEP 3: Execute a query
+            System.out.println("Creating table in given database...");
+            stmt = conn.createStatement();
+            String sql = "CREATE TABLE IF NOT EXISTS TESTABLE " +
+                    "(id int primary key, name varchar(255))";
+            stmt.executeUpdate(sql);
+            System.out.println("Created table in given database...");
+
+            // STEP 4: Clean-up environment
+            stmt.close();
+            conn.close();
+
+        } catch(SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch(Exception e) {
+            //Handle errors for Class.forName
             e.printStackTrace();
-        }
+        } finally {
+            //finally block used to close resources
+            try{
+                if(stmt!=null) stmt.close();
+            } catch(SQLException se2) {
+
+            } // nothing we can do
+            try {
+                if(conn!=null) conn.close();
+            } catch(SQLException se){
+                se.printStackTrace();
+            } //end finally try
+        } //end try
+        System.out.println("Goodbye connection!");
     }
+    public void insertInDB(int iter, String url) {
+        Connection conn = null;
+        PreparedStatement insertPS = null;
 
-    public void insertInDB(String nameOfTable, String url, int iter) {
-        try (Connection connection = getConnectionToDB()) {
-            connection.setAutoCommit(false);
-            PreparedStatement insertPreparedStatement;
-            String insertQuery = "INSERT INTO " +regex(nameOfTable)+" (id, name) values ("+iter+",'result')";
-            System.out.println("valid request for addition");
-            System.out.println(insertQuery);
-            //запрос на добавлеие в таблицу
+        try {
+            // STEP 1: Register JDBC driver
+            Class.forName(JDBC_DRIVER);
 
-            insertPreparedStatement = connection.prepareStatement(insertQuery);
-            insertPreparedStatement.executeUpdate();
-            insertPreparedStatement.close();
-            connection.commit();
+            //STEP 2: Open a connection
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            //STEP 3: Create PS
+            insertPS = conn.prepareStatement("INSERT INTO TESTABLE (id, name) values (?,?)");
+            System.out.println("PS was created..");
+
+            //STEP 4: Update PS
+            insertPS.setInt(1,iter);
+            insertPS.setString(2,url);
+            System.out.println("PS was update..");
+
+            //STEP 5: Add PS in Table
+            insertPS.executeUpdate();
+            insertPS.close();
+            conn.close();
             System.out.println("query correctly add");
-            //установка соединения и добавления изменений
 
-        } catch (SQLException e) {
-            System.out.println("Exception Message " + e.getLocalizedMessage());
-        } catch (Exception e) {
+        } catch(SQLException se) {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        } catch(Exception e) {
+            //Handle errors for Class.forName
             e.printStackTrace();
-        }
+
+        } finally {
+            //finally block used to close resources
+            try{
+                if(insertPS!=null) insertPS.close();
+            } catch(SQLException se2) {
+
+            } // nothing we can do
+            try {
+                if(conn!=null) conn.close();
+            } catch(SQLException se){
+                se.printStackTrace();
+            } //end finally try
+        } //end try
+        System.out.println("Goodbye connection!");
     }
 
 }
-

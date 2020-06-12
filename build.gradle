@@ -29,6 +29,7 @@ jar {
                 "Main-Class": "view.Main");
     }
 }
+
 task fatJar(type: Jar) {
     manifest.from jar.manifest
     from {

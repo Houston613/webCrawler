@@ -6,8 +6,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.LinkedHashSet;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ParserTest {
 
     @Test

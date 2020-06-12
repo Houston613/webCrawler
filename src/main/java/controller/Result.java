@@ -45,13 +45,14 @@ public class Result {
             }
         });
         addToDB.setOnAction(event -> {
+
             H2DB h2DB = new H2DB();
-            URL nameOfTable = list.get(0);
-            h2DB.createDBTable(String.valueOf(nameOfTable));
-            int iter =0;
-            for (URL link :Controller.result){
+            h2DB.createDb();
+            int iter = 0;
+
+            for (URL link :Controller.result) {
                 iter++;
-                h2DB.insertInDB(String.valueOf(nameOfTable), String.valueOf(link),iter);
+                h2DB.insertInDB(iter,String.valueOf(link));
             }
         });
     }
