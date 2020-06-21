@@ -11,7 +11,7 @@ class ParserTest {
     @Test
     void htmlParser() throws MalformedURLException {
         Parser parser = new Parser(87);
-        LinkedHashSet<URL> needToParse = new LinkedHashSet<URL>();
+        LinkedHashSet<URL> needToParse = new LinkedHashSet<>();
         needToParse.add(new URL("http://alexandr4784.narod.ru/index.html"));
         LinkedHashSet<URL> result = parser.htmlParser(needToParse,needToParse);
     }

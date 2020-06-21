@@ -14,6 +14,7 @@ public class DownloadPage {
             BufferedReader reader =
                     new BufferedReader(new InputStreamReader(webPage.openStream()));
             logger.info("reader - success");
+
             BufferedWriter writer =
                     new BufferedWriter(new FileWriter("Download"+ iter +".html"));
             logger.info("writer - success");

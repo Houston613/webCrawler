@@ -17,11 +17,6 @@ import model.H2DB;
 public class Result {
     ObservableList<URL> list = FXCollections.observableArrayList();
 
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private Button downloadButton;
@@ -34,10 +29,14 @@ public class Result {
 
     @FXML
     void initialize(){
+
         //вывод на экран
         addToResult();
         downloadButton.setOnAction(event -> {
+            //скачиваем страницы
             DownloadPage downloadPage = new DownloadPage();
+
+            //номер добавляемый перед скачиванием
             int iter = 0;
             for (URL link: Controller.result){
                 iter++;
@@ -45,7 +44,7 @@ public class Result {
             }
         });
         addToDB.setOnAction(event -> {
-
+            //создание ДБ
             H2DB h2DB = new H2DB();
             h2DB.createDb();
             for (URL link :Controller.result) {
@@ -53,9 +52,6 @@ public class Result {
             }
         });
     }
-
-
-
 
     private void addToResult(){
         list.addAll(Controller.result);

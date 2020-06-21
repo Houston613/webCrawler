@@ -15,32 +15,37 @@ public class Parser {
     private static final Logger logger = LogManager.getLogger();
     private final int depth;
 
+    //указываем количество ссылок, которые будут собраны в all
     public Parser(int depth){
         this.depth = depth;
-        //указываем количество ссылок, которые будут собраны в all
     }
 
     public LinkedHashSet<URL> htmlParser(LinkedHashSet<URL> needToParse, LinkedHashSet<URL> allURL) throws IndexOutOfBoundsException{
 
-        LinkedHashSet<URL> urlsAdd = new LinkedHashSet<>();
         //ссылки собранные с текущей страницы
+        //кажлдый раз новые
+        LinkedHashSet<URL> urlsAdd = new LinkedHashSet<>();
+
         try {
             for (URL url: needToParse) {
+
+                //подключение к странице
                 Document doc = Jsoup.connect(String.valueOf(url)).get();
                 logger.info("jsoup connect - success");
 
-                //подключение к странице
-                Elements links = doc.select("a[href]");
                 //записываются все ссылки
-                for (Element link : links) {
-                    urlsAdd.add(new URL(link.attr("abs:href")));
-                    //заменяет needToParse в след проходах
+                Elements links = doc.select("a[href]");
 
+                for (Element link : links) {
+                    //заменяет needToParse в след проходах рекурсии
+                    urlsAdd.add(new URL(link.attr("abs:href")));
+
+                    //если достигли максимальной глубины, выходим из парсера
                     if (allURL.size()==depth)
                         return allURL;
-                    //если достигли максимальной глубины, выходим из парсера
 
                     else
+                        //парсим дальше
                         allURL.add(new URL(link.attr("abs:href")));
                 }
             }
@@ -48,7 +53,8 @@ public class Parser {
         catch (IOException exception) {
             exception.printStackTrace();
         }
-        return htmlParser(urlsAdd, allURL);
+
         //если прошли все ссылки на странице, запускаем еще раз парсер по уже найденым стр
+        return htmlParser(urlsAdd, allURL);
     }
 }

@@ -13,3 +13,33 @@
 2020-06-21 16:22:19,956 INFO m.H2DB [JavaFX Application Thread] PS was update..
 2020-06-21 16:22:19,960 INFO m.H2DB [JavaFX Application Thread] query correctly add
 2020-06-21 16:22:19,960 INFO m.H2DB [JavaFX Application Thread] Goodbye connection!
+2020-06-21 20:58:00,809 INFO v.Main [main] Log4j2ExampleApp started.
+2020-06-21 21:35:24,593 INFO v.Main [main] Log4j2ExampleApp started.
+2020-06-21 21:35:34,557 INFO m.Parser [JavaFX Application Thread] jsoup connect - success
+2020-06-21 21:35:42,462 INFO m.DownloadPage [JavaFX Application Thread] reader - success
+2020-06-21 21:35:42,470 INFO m.DownloadPage [JavaFX Application Thread] writer - success
+2020-06-21 21:55:46,697 INFO v.Main [main] Log4j2ExampleApp started.
+2020-06-21 21:55:54,445 INFO m.Parser [JavaFX Application Thread] jsoup connect - success
+2020-06-21 21:55:54,454 INFO c.Controller [JavaFX Application Thread] crawler - success
+2020-06-21 21:55:56,129 INFO m.H2DB [JavaFX Application Thread] Creating table in given database...
+2020-06-21 21:55:56,144 INFO m.H2DB [JavaFX Application Thread] Connecting to database...
+2020-06-21 21:55:56,399 INFO m.H2DB [JavaFX Application Thread] Created table in given database...
+2020-06-21 21:55:56,399 INFO m.H2DB [JavaFX Application Thread] Connecting to database...
+2020-06-21 21:55:56,400 INFO m.H2DB [JavaFX Application Thread] Connecting to database...
+2020-06-21 21:55:56,401 INFO m.H2DB [JavaFX Application Thread] Connecting to database...
+2020-06-21 21:55:56,401 INFO m.H2DB [JavaFX Application Thread] Goodbye connection!
+2020-06-21 21:55:56,402 INFO m.H2DB [JavaFX Application Thread] Connecting to database...
+2020-06-21 21:55:56,405 INFO m.H2DB [JavaFX Application Thread] PS was created..
+2020-06-21 21:55:56,406 INFO m.H2DB [JavaFX Application Thread] PS was update..
+2020-06-21 21:55:56,408 INFO m.H2DB [JavaFX Application Thread] Connecting to database...
+2020-06-21 21:55:56,409 INFO m.H2DB [JavaFX Application Thread] query correctly add
+2020-06-21 21:55:56,409 INFO m.H2DB [JavaFX Application Thread] Connecting to database...
+2020-06-21 21:55:56,409 INFO m.H2DB [JavaFX Application Thread] Connecting to database...
+2020-06-21 21:55:56,410 INFO m.H2DB [JavaFX Application Thread] Goodbye connection!
+
+2020-06-21 22:06:29,999 INFO v.Main [main] Log4j2ExampleApp started.
+2020-06-21 22:07:11,700 INFO v.Main [main] Log4j2ExampleApp started.
+2020-06-21 22:07:42,790 INFO v.Main [main] Log4j2ExampleApp started.
+2020-06-21 22:09:57,006 INFO v.Main [main] Log4j2ExampleApp started.
+2020-06-21 22:12:22,235 INFO v.Main [main] Log4j2ExampleApp started.
+2020-06-21 22:12:51,974 INFO v.Main [main] Log4j2ExampleApp started.

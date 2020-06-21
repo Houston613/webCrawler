@@ -17,13 +17,15 @@ public class Crawler {
 
     public LinkedHashSet<URL> crawl() throws MalformedURLException {
 
-        LinkedHashSet<URL> needToParse = new LinkedHashSet<>();
         //сет который подается в парсер как изначальный
+        LinkedHashSet<URL> needToParse = new LinkedHashSet<>();
+
+        //добавляем первый URL в лист
         URL firstAdd = new URL(firstUrl);
         needToParse.add(firstAdd);
-        //добавляем первый URL в лист
-        Parser parser = new Parser(numberOfUrl);
+
         //создаем экземпляр класса который парсит URL и сохраняет оттуда ссылки
+        Parser parser = new Parser(numberOfUrl);
 
         return parser.htmlParser(needToParse,needToParse);
     }
