@@ -48,11 +48,8 @@ public class Result {
 
             H2DB h2DB = new H2DB();
             h2DB.createDb();
-            int iter = 0;
-
             for (URL link :Controller.result) {
-                iter++;
-                h2DB.insertInDB(iter,String.valueOf(link));
+                h2DB.insertInDB(String.valueOf(link));
             }
         });
     }

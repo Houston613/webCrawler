@@ -1,7 +1,11 @@
 package model;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.*;
 
 public class H2DB {
+    private static final Logger logger = LogManager.getLogger();
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "org.h2.Driver";
     static final String DB_URL = "jdbc:h2:~/test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE";
@@ -16,16 +20,16 @@ public class H2DB {
             Class.forName(JDBC_DRIVER);
 
             //STEP 2: Open a connection
-            System.out.println("Connecting to database...");
+            logger.info("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
             //STEP 3: Execute a query
-            System.out.println("Creating table in given database...");
+            logger.info("Creating table in given database...");
             stmt = conn.createStatement();
             String sql = "CREATE TABLE IF NOT EXISTS TESTABLE " +
                     "(id int IDENTITY NOT NULL PRIMARY KEY, name varchar(255))";
             stmt.executeUpdate(sql);
-            System.out.println("Created table in given database...");
+            logger.info("Created table in given database...");
 
             // STEP 4: Clean-up environment
             stmt.close();
@@ -50,9 +54,9 @@ public class H2DB {
                 se.printStackTrace();
             } //end finally try
         } //end try
-        System.out.println("Goodbye connection!");
+        logger.info("Goodbye connection!");
     }
-    public void insertInDB(int iter, String url) {
+    public void insertInDB(String url) {
         Connection conn = null;
         PreparedStatement insertPS;
 
@@ -66,17 +70,17 @@ public class H2DB {
 
             //STEP 3: Create PS
             insertPS = conn.prepareStatement("INSERT INTO TESTABLE (name) values (?)");
-            System.out.println("PS was created..");
+            logger.info("PS was created..");
 
             //STEP 4: Update PS
             insertPS.setString(1,url);
-            System.out.println("PS was update..");
+            logger.info("PS was update..");
 
             //STEP 5: Add PS in Table
             insertPS.executeUpdate();
             insertPS.close();
             conn.close();
-            System.out.println("query correctly add");
+            logger.info("query correctly add");
 
         } catch(SQLException se) {
             //Handle errors for JDBC
@@ -93,7 +97,7 @@ public class H2DB {
                 se.printStackTrace();
             } //end finally try
         } //end try
-        System.out.println("Goodbye connection!");
+        logger.info("Goodbye connection!");
     }
 
 }

@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,7 +54,8 @@ public class Controller {
                         System.out.println(result);
                         int tempDepth = 0;
 
-                        Parent root = FXMLLoader.load(getClass().getResource("../view/ResultFxml.fxml"));
+                        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().
+                                getResource("ResultFxml.fxml")));
                         Scene scene = new Scene(root);
                         Stage stage = new Stage();
                         stage.setScene(scene);

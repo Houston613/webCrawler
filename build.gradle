@@ -21,39 +21,12 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
     compile 'org.jsoup:jsoup:1.13.1'
     compile group: 'com.h2database', name: 'h2', version: '1.4.200'
-
-}
-jar {
-    manifest {
-        attributes("Manifest-Version": "1.0",
-                "Main-Class": "view.Main");
-    }
-}
-
-task fatJar(type: Jar) {
-    manifest.from jar.manifest
-    from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    } {
-        exclude "META-INF/.SF"
-        exclude "META-INF/.DSA"
-        exclude "META-INF/*.RSA"
-    }
-    with jar
-
-}
-sourceSets {
-    main {
-        resources {
-            srcDirs = ["src/main/java"]
-            includes = ["/view/MainFxml.fxml","/view/ResultFxml.fxml"]
-        }
-    }
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.13.3'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
 }
 
 javafx{
     version = '14'
     modules = ['javafx.controls','javafx.fxml']
 }
-
 mainClassName = 'view.Main'

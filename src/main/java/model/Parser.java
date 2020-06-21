@@ -1,5 +1,7 @@
 package model;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -10,7 +12,7 @@ import java.net.URL;
 import java.util.LinkedHashSet;
 
 public class Parser {
-
+    private static final Logger logger = LogManager.getLogger();
     private final int depth;
 
     public Parser(int depth){
@@ -25,6 +27,8 @@ public class Parser {
         try {
             for (URL url: needToParse) {
                 Document doc = Jsoup.connect(String.valueOf(url)).get();
+                logger.info("jsoup connect - success");
+
                 //подключение к странице
                 Elements links = doc.select("a[href]");
                 //записываются все ссылки

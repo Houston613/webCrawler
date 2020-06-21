@@ -1,0 +1,15 @@
+2020-06-21 16:16:15,470 INFO v.Main [main] Log4j2ExampleApp started.
+2020-06-21 16:16:27,057 INFO m.Parser [JavaFX Application Thread] jsoup connect - success
+2020-06-21 16:18:48,588 INFO v.Main [main] Log4j2ExampleApp started.
+2020-06-21 16:21:58,239 INFO v.Main [main] Log4j2ExampleApp started.
+2020-06-21 16:22:15,313 INFO m.Parser [JavaFX Application Thread] jsoup connect - success
+2020-06-21 16:22:17,715 INFO m.DownloadPage [JavaFX Application Thread] reader - success
+2020-06-21 16:22:17,725 INFO m.DownloadPage [JavaFX Application Thread] writer - success
+2020-06-21 16:22:19,579 INFO m.H2DB [JavaFX Application Thread] Connecting to database...
+2020-06-21 16:22:19,942 INFO m.H2DB [JavaFX Application Thread] Creating table in given database...
+2020-06-21 16:22:19,948 INFO m.H2DB [JavaFX Application Thread] Created table in given database...
+2020-06-21 16:22:19,948 INFO m.H2DB [JavaFX Application Thread] Goodbye connection!
+2020-06-21 16:22:19,955 INFO m.H2DB [JavaFX Application Thread] PS was created..
+2020-06-21 16:22:19,956 INFO m.H2DB [JavaFX Application Thread] PS was update..
+2020-06-21 16:22:19,960 INFO m.H2DB [JavaFX Application Thread] query correctly add
+2020-06-21 16:22:19,960 INFO m.H2DB [JavaFX Application Thread] Goodbye connection!
