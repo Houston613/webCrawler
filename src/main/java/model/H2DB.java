@@ -1,4 +1,5 @@
 package model;
+import controller.Controller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,7 +40,7 @@ public class H2DB {
             logger.info("Creating table in given database...");
             stmt = connection().createStatement();
             String sql = "CREATE TABLE IF NOT EXISTS TESTABLE " +
-                    "(id int IDENTITY NOT NULL PRIMARY KEY, name varchar(255))";
+                    "(id int IDENTITY NOT NULL PRIMARY KEY, name varchar(255), text varchar(255))";
             stmt.executeUpdate(sql);
             logger.info("Created table in given database...");
 
@@ -71,11 +72,12 @@ public class H2DB {
 
         try {
             //STEP 3: Create PS
-            insertPS = connection().prepareStatement("INSERT INTO TESTABLE (name) values (?)");
+            insertPS = connection().prepareStatement("INSERT INTO TESTABLE (name,text) values (?, ?)");
             logger.info("PS was created..");
 
             //STEP 4: Update PS
             insertPS.setString(1,url);
+            insertPS.setString(2, Controller.getTextForDB());
             logger.info("PS was update..");
             //STEP 5: Add PS in Table
             insertPS.executeUpdate();

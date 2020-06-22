@@ -38,7 +38,7 @@ public class Result {
 
             //номер добавляемый перед скачиванием
             int iter = 0;
-            for (URL link: Controller.result){
+            for (URL link: Controller.getResult()){
                 iter++;
                 downloadPage.DownloadWebPage(link,iter);
             }
@@ -47,14 +47,14 @@ public class Result {
             //создание ДБ
             H2DB h2DB = new H2DB();
             h2DB.createDb();
-            for (URL link :Controller.result) {
+            for (URL link :Controller.getResult()) {
                 h2DB.insertInDB(String.valueOf(link));
             }
         });
     }
 
     private void addToResult(){
-        list.addAll(Controller.result);
+        list.addAll(Controller.getResult());
         for (URL link :list){
             ResultList.getItems().add(String.valueOf(link));
         }

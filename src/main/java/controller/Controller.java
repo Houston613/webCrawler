@@ -21,7 +21,18 @@ import java.util.*;
 
 public class Controller {
     private static final Logger logger = LogManager.getLogger();
-    static LinkedHashSet<URL> result;
+
+    public static LinkedHashSet<URL> getResult() {
+        return result;
+    }
+
+    public static String getTextForDB() {
+        return textForDB;
+    }
+
+    private static String textForDB;
+    private static LinkedHashSet<URL> result;
+
 
 
     @FXML
@@ -39,9 +50,8 @@ public class Controller {
     @FXML
     void initialize() {
         findButton.setOnAction(event -> {
-
+            textForDB = textUrl.getText();
             String text;
-
             if (!checkBox.isSelected())
                 //если запрос не ссылка, а просто текст, то мы вбиваем его в яндекс и добавляем то что нашли
                 text = (new StringBuilder().append("https://yandex.ru/search/?text=").append(textUrl.getText()).toString());
